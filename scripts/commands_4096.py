@@ -1,5 +1,15 @@
 """
+Ctrl-Z FRC Team 4096
+FIRST Robotics Competition
+contact@team4096.org
+
 Script for defining new commands inside Wing IDE.
+Tested with Wing IDE 5 Professional
+
+Last updated March 2017 for Steamworks
+
+Copy to the following folder on windows:
+%APPDATA%\Wing IDE 5\scripts
 """
 
 import ctypes
@@ -11,6 +21,10 @@ import re
 import time
 
 import wingapi
+
+RPI_LOGIN	= 'login_name'
+RPI_PASS	= 'password'
+
 
 def _copy_files_to_pi( robot_filename ):
 	# Look in robot.py for GRIP_FILE_PATH
@@ -37,7 +51,7 @@ def _copy_files_to_pi( robot_filename ):
 		return
 	
 	print( 'Copying folder to RPi: "{0}"'.format( vision_dir ) ) 
-	result = subprocess.Popen( 'pscp.exe -r -pw UndeadRobotics "{0}" ctrlz@10.40.96.18:/home/ctrlz'.format( vision_dir ) ).wait( )
+	result = subprocess.Popen( 'pscp.exe -r -pw {0} "{1}" {2}@10.40.96.18:/home/ctrlz'.format( RPI_PASS, vision_dir, RPI_LOGIN ) ).wait( )
 	print( 'delay...')
 	time.sleep( 0 )
 
